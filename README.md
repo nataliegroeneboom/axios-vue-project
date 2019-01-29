@@ -1,33 +1,25 @@
 # vue_axios
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
 ### Notes on axios + Vue
-In App.vue I have examples of how to send get, post and both with axios.  I have the server set up in the 'server' folder.  
+In this branch I am learning how to upload images/files with axios
+
+###FormData
+**FormData** interface provides a say to easily construct a set of key/value pairs representing form fields and their values. Below when the button is clicked, a formData object is created and the file is appended to the object.  $refs attribute refers elements on our Vue instance, we have access to DOM element
+
+```html
+<input type="file" accept="image/*" ref="file" multiple/>
+<button @click="upload">Upload Image</button>
+```
+
+```javascript
+ methods: {
+   upload(){
+     let formData = new FormData();
+     console.log(this.$refs);
+   }
+ }
+ ```
+ In the console log
+ 
+ 
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
