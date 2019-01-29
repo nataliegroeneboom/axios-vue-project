@@ -76,10 +76,9 @@ So within the upload method you append the file to the formData object and send 
      })
    }
    ```
+###Uploading Multiple Images 
 
-    ### Uploading Multiple images
-
-    ``` html
+    ```html
     <button @click="upload_multiple">Upload Multiple Image</button>
     ```
 
@@ -101,8 +100,8 @@ So within the upload method you append the file to the formData object and send 
         }
     }
 }else{
-    echo false;
-}
+            echo false;
+    }
 ```
 
 ``` javascript
