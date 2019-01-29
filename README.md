@@ -27,3 +27,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Notes on axios + Vue
+In App.vue I have examples of how to send get, post and both with axios.  I have the server set up in the 'server' folder.  
