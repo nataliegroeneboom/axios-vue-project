@@ -37,6 +37,7 @@ So within the upload method you append the file to the formData object and send 
  ```
 
  ###Uploading One Image
+
  In the backend file upload.php we add validation checks as to whether the image has been uploaded
 
  ``` php
@@ -78,13 +79,13 @@ So within the upload method you append the file to the formData object and send 
    ```
 ###Uploading Multiple Images 
 
-    ```html
+ ```html
     <button @click="upload_multiple">Upload Multiple Image</button>
-    ```
+ ```
 
     Difference being that we have to loop through the array
 
-    ``` php
+ ``` php
     if(!empty($_FILES)){
     foreach($_FILES as $item){
         if($item['error'] ==0){
@@ -103,6 +104,7 @@ So within the upload method you append the file to the formData object and send 
             echo false;
     }
 ```
+
 
 ``` javascript
   upload_multiple(){
@@ -124,3 +126,19 @@ So within the upload method you append the file to the formData object and send 
      })
    },
    ```
+   
+   ### Custom Axios Object
+   You can create a custom axios object using the create method
+ ```javascript
+   let custom_axios = axios.create({});
+   ```
+    
+ Then you can replace **axios** with **custom_axios**
+
+ Its not a good idea to import axios in every component, better way is to import axios in one file and then store it in a vue prototype. In this way the axios object is part of the vue object and every component file can access axios using the keyword **this**
+
+ ```javascript
+vue.prototype.custom_axios = custom_axios
+....
+this.custom_axios.post('/backend', formData, ...
+```
