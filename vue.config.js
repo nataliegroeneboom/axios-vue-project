@@ -6,7 +6,7 @@ module.exports = {
                 changeOrigin: true,
                 secure: false,
                 pathRewrite: {
-                    "/backend" : '/api/'
+                    "/backend" : '/api/upload.php'
                 }
             }
         }

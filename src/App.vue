@@ -2,7 +2,7 @@
   <div id="app">
 <p>Upload File: images only</p>
 <input type="file" accept="image/*" ref="file" multiple/>
-<button @click="upload">Upload Image</button>
+<button @click="upload_multiple">Upload Multiple Image</button>
   </div>
 </template>
 
@@ -12,9 +12,38 @@ import axios from 'axios';
 import qs from 'qs';
 export default {
  methods: {
+   upload_multiple(){
+     let formData = new FormData();
+     let length = this.$refs.file.files.length;
+     for(var i = 0; i < length; i++){
+       formData.append(i, this.$refs.file.files[i] )
+     }
+        axios.post('/backend', formData)
+     .then(function(response){
+       if(response.data){
+         alert(response.data)
+       }else{
+         alert('image was not uploaded')
+       }
+     })
+     .catch(function(error){
+       
+     })
+   },
    upload(){
      let formData = new FormData();
-     console.log(this.$refs);
+     formData.append(0, this.$refs.file.files[0])
+     axios.post('/backend', formData)
+     .then(function(response){
+       if(response.data){
+         alert('image uploaded')
+       }else{
+         alert('image was not uploaded')
+       }
+     })
+     .catch(function(error){
+       
+     })
    }
  }
 }
