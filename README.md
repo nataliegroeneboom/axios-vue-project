@@ -39,7 +39,7 @@ So within the upload method you append the file to the formData object and send 
  ###Uploading One Image
  In the backend file upload.php we add validation checks as to whether the image has been uploaded
 
- ```php
+ ``` php
  if(!empty($_FILES)){
     if($_FILES[0]['error']==0){
         //check file type and size
@@ -59,7 +59,7 @@ So within the upload method you append the file to the formData object and send 
 
  The response.data is either true or false, as set out by the php if/else statements
 
- ```javascript
+ ``` javascript
    upload(){
      let formData = new FormData();
      formData.append(0, this.$refs.file.files[0])
@@ -77,15 +77,15 @@ So within the upload method you append the file to the formData object and send 
    }
    ```
 
-    ###Uploading Multiple images
+    ### Uploading Multiple images
 
-    ```html
+    ``` html
     <button @click="upload_multiple">Upload Multiple Image</button>
     ```
 
     Difference being that we have to loop through the array
 
-    ```php
+    ``` php
     if(!empty($_FILES)){
     foreach($_FILES as $item){
         if($item['error'] ==0){
@@ -104,7 +104,8 @@ So within the upload method you append the file to the formData object and send 
     echo false;
 }
 ```
-```javascript
+
+``` javascript
   upload_multiple(){
      let formData = new FormData();
      let length = this.$refs.file.files.length;
