@@ -22,4 +22,4 @@ In this branch I am learning how to upload images/files with axios
  In the console log
  
  
-![alt text](https://github.com/nataliegroeneboom/axios-vue-project/blob/axios-upload/console.pngs)
+![alt text](https://github.com/nataliegroeneboom/axios-vue-project/blob/axios-upload/console.png)
