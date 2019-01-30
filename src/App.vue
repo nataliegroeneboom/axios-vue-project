@@ -1,67 +1,91 @@
 <template>
-  <div id="app">
-<p>Upload File: images only</p>
-<input type="file" accept="image/*" ref="file" multiple/>
-<button @click="upload_multiple">Upload Multiple Image</button>
-<p v-if="progress">Uploaded: {{progress}}%</p>
-<progress max="100" v-bind:value='progress'></progress>
+  <div id="app" class="container">
+    <img src="./assets/logo.png">
+    <div>
+      <p>
+        If iView is successfully added to this project, you'll see an
+        <code v-text="'<Button>'"></code>
+        below
+      </p>
+      <Button type="primary" shape="circle" :loading='loading_control' icon="ios-home">Button</Button>
+      <Button type="primary" long :disabled='button_control'>Long Button</Button>
+      <ButtonGroup :vertical='true'>
+          <Button type='primary'>Button</Button>
+          <Button type='warning'>Button</Button>
+          <Button type='success'>Button</Button>
+      </ButtonGroup>
+      <i-Switch @on-change='change'>
+        <span slot='open'>on</span>
+        <span slot='close'>off</span>
+      </i-Switch>
+      <Slider v-model='slider_value' :min='50' :max='200' :step='10' show-stops></Slider>
+      <p>{{slider_value}}</p>
+      <Slider v-model='slider_range' range></Slider>
+     <Icon type="ios-checkmark" size="36" color="teal" />
+    </div>
+    <Button type="primary" @click="info">Display info prompt
+    </Button >
+    <Table :columns='column' :data='table_data' stripe ></Table>
+    <Carousel style='width:600px' autoplay :autoplay-speed='2000' dots='outside'>
+      <CarouselItem v-for='item in images' :key='item.id'>
+          <img :src='item' />
+        </CarouselItem>>
+    </Carousel>
+    <Progress :percent='25'></Progress>
+
+
+
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
+import HelloWorld from './components/HelloWorld.vue'
 
-import axios from 'axios';
-import qs from 'qs';
-import vue from 'vue';
-vue.prototype.custom_axios = custom_axios
-let custom_axios = axios.create({});
 export default {
- data: function(){
-    return{
-      progress: 0
+  name: 'app',
+  data(){
+    return {
+      images: [
+        'http://axios-project.ddev.local/api/storage/pexels-photo-1826095.jpeg',
+        'http://axios-project.ddev.local/api/storage/pexels-photo-1831238.jpeg',
+
+      ],
+      column: [
+        {title:'Brand', key:'brand'},
+        {title:'Model', key:'model'},
+        {title:'Engine', key:'engine'},
+        {title:'Gearbox', key:'gearbox'}
+      ],
+      table_data: [
+        {brand: 'Toyota', model: 'Supra', engine:'Petrol', gearbox:'manual'},
+        {brand: 'VW', model: 'Golf', engine:'Petrol', gearbox:'manual'},
+        {brand: 'VW', model: 'Polo', engine:'Petrol', gearbox:'manual'}
+      ],
+      button_control: true,
+      loading_control: false,
+      slider_value:50,
+      slider_range: [10,30]
     }
- },  
- methods: {
-   upload_multiple(){
-     let formData = new FormData();
-     let length = this.$refs.file.files.length;
-     let vm = this;
-     for(var i = 0; i < length; i++){
-       formData.append(i, this.$refs.file.files[i] )
-     }
-        this.custom_axios.post('/backend', formData, {
-          onUploadProgress:function(uploadevent){
-            console.log(Math.round(uploadevent.loaded/uploadevent.total *100))
-            vm.progress = Math.round(uploadevent.loaded/uploadevent.total *100)
-          }
-        })
-     .then(function(response){
-       if(response.data){
-         alert(response.data)
-       }else{
-         alert('image was not uploaded')
-       }
-     })
-     .catch(function(error){
-       
-     })
-   },
-   upload(){
-     let formData = new FormData();
-     formData.append(0, this.$refs.file.files[0])
-     this.custom_axios.post('/backend', formData)
-     .then(function(response){
-       if(response.data){
-         alert('image uploaded')
-       }else{
-         alert('image was not uploaded')
-       }
-     })
-     .catch(function(error){
-       
-     })
-   }
- }
+  },
+  methods: {
+    change(status){
+      this.$Message.success({
+        content: 'this is the message',
+        duration: 10,
+        closable: true,
+        onClose(){
+          alert('you really want to close this message?')
+        }
+      });
+    },
+    info() {
+      this.$Message.info('This is info from iview Message');
+    }
+  },
+  components: {
+    HelloWorld
+  }
 }
 </script>
 
